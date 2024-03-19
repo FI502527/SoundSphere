@@ -29,5 +29,26 @@ namespace DAL
             sqlConnection.Close();
             return song;
         }
+        public List<Song> LoadAllSongs()
+        {
+            Connection conn = new();
+            SqlConnection sqlConnection = conn.GetConnection();
+            SqlCommand command = new SqlCommand($"SELECT * FROM Songs;", sqlConnection);
+            List<Song> songs = new List<Song>();
+            sqlConnection.Open();
+            SqlDataReader DataReader = command.ExecuteReader();
+            if (DataReader.HasRows)
+            {
+                while (DataReader.Read())
+                {
+                    Song song = new Song();
+                    song.SetDetails(DataReader.GetInt32(0), DataReader.GetString(1));
+                    songs.Add(song);
+                }
+            }
+            DataReader.Close();
+            sqlConnection.Close();
+            return songs;
+        }
     }
 }

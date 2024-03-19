@@ -16,8 +16,6 @@ namespace SoundSphere.Controllers
 
         public IActionResult Index()
         {
-            SongRepository songRepository = new SongRepository();
-            songRepository.LoadSongById(1);
             return View();
         }
 
