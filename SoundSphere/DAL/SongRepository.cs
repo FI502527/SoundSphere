@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
+using Interfaces;
 
 namespace DAL
 {
-    public class SongRepository
+    public class SongRepository : ISongRepository
     {
         public Song LoadSongById(int id)
         {
@@ -49,6 +50,17 @@ namespace DAL
             DataReader.Close();
             sqlConnection.Close();
             return songs;
+        }
+        public bool AddSong(Song song)
+        {
+            Connection conn = new();
+            using (SqlConnection sqlConnection = conn.GetConnection())
+            {
+                SqlCommand command = new SqlCommand($"INSERT INTO Songs (title) VALUES (\'{song.Title}\')", sqlConnection);
+                command.Connection.Open();
+                int result = command.ExecuteNonQuery();
+                return result > 0;
+            }
         }
     }
 }

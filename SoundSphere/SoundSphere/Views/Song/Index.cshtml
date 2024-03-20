@@ -1,12 +1,13 @@
 ﻿@using Models
 @model List<Song>
 <p class="fs-1 text-center fw-bold">Songs</p>
+<p class="text-center"><a type="button" class="btn btn-primary" asp-action="Add" asp-controller="Song">Add song</a></p>
 @if(Model.Any())
 {
-    <div class="row row-cols-3">
+    <div class="row row-cols-3 row-gap-3">
     @foreach(Song song in Model)
     {
-        <div class="col">
+        <div class="col mt-10">
             <div class="card">
                 <div class="card-body">
                     <div class="card-title fs-4 fw-bold">@song.Title</div>

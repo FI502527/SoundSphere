@@ -1,8 +1,11 @@
+using Interfaces;
+using Logic;
 using DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<SongRepository>();
+builder.Services.AddTransient<SongService>();
+builder.Services.AddTransient<ISongRepository, SongRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
