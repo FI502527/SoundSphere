@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{E75F2FDB-CEC5-4F20-BDCC-54BD392216AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{58B60C7A-1FC3-4E87-A2B1-8AD13CEC8F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{9E51FBB3-9311-49C2-8355-5B294276BAAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{E75F2FDB-CEC5-4F20-BDCC-54BD392216AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E75F2FDB-CEC5-4F20-BDCC-54BD392216AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E75F2FDB-CEC5-4F20-BDCC-54BD392216AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B60C7A-1FC3-4E87-A2B1-8AD13CEC8F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B60C7A-1FC3-4E87-A2B1-8AD13CEC8F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B60C7A-1FC3-4E87-A2B1-8AD13CEC8F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B60C7A-1FC3-4E87-A2B1-8AD13CEC8F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E51FBB3-9311-49C2-8355-5B294276BAAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E51FBB3-9311-49C2-8355-5B294276BAAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E51FBB3-9311-49C2-8355-5B294276BAAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E51FBB3-9311-49C2-8355-5B294276BAAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

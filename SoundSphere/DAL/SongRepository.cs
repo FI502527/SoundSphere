@@ -4,53 +4,63 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DTO;
+using Models;
+using Interfaces;
 
 namespace DAL
 {
     public class SongRepository : ISongRepository
     {
-        public SongDTO LoadSongById(int id)
+        public Song LoadSongById(int id)
         {
             Connection conn = new();
             SqlConnection sqlConnection = conn.GetConnection();
             SqlCommand command = new SqlCommand($"SELECT * FROM Songs WHERE id = {id};", sqlConnection);
-            SongDTO song = new SongDTO();
+            Song song = new Song();
             sqlConnection.Open();
             SqlDataReader DataReader = command.ExecuteReader();
             if (DataReader.HasRows)
             {
                 while (DataReader.Read())
                 {
-                    song.Id = DataReader.GetInt32(0);
-                    song.Title = DataReader.GetString(1);
+                    song.SetDetails(DataReader.GetInt32(0), DataReader.GetString(1));
                 }
             }
             DataReader.Close();
             sqlConnection.Close();
             return song;
         }
-        public List<SongDTO> LoadAllSongs()
+        public List<Song> LoadAllSongs()
         {
             Connection conn = new();
             SqlConnection sqlConnection = conn.GetConnection();
             SqlCommand command = new SqlCommand($"SELECT * FROM Songs;", sqlConnection);
-            List<SongDTO> allSongs = new List<SongDTO>();
+            List<Song> songs = new List<Song>();
             sqlConnection.Open();
             SqlDataReader DataReader = command.ExecuteReader();
             if (DataReader.HasRows)
             {
                 while (DataReader.Read())
                 {
-                    SongDTO song = new SongDTO();
-                    song.Id = DataReader.GetInt32(0);
-                    song.Title = DataReader.GetString(1);
-                    allSongs.Add(song);
+                    Song song = new Song();
+                    song.SetDetails(DataReader.GetInt32(0), DataReader.GetString(1));
+                    songs.Add(song);
                 }
             }
             DataReader.Close();
             sqlConnection.Close();
-            return allSongs;
+            return songs;
+        }
+        public bool AddSong(Song song)
+        {
+            Connection conn = new();
+            using (SqlConnection sqlConnection = conn.GetConnection())
+            {
+                SqlCommand command = new SqlCommand($"INSERT INTO Songs (title) VALUES (\'{song.Title}\')", sqlConnection);
+                command.Connection.Open();
+                int result = command.ExecuteNonQuery();
+                return result > 0;
+            }
         }
     }
 }

@@ -1,36 +1,22 @@
-﻿using DAL;
-using DAL.DTO;
-using Logic.Models;
+﻿using Interfaces;
+using Models;
 
 namespace Logic
 {
     public class SongService
     {
-        private readonly ISongRepository _repo;
-        public SongService(ISongRepository repo)
+        private readonly ISongRepository songRepository;
+        public SongService(ISongRepository songRepository)
         {
-            _repo = repo;
+            this.songRepository = songRepository;
         }
-        public SongModel LoadSongById(int id)
+        public List<Song> LoadAllSongs()
         {
-            SongDTO songDTO = _repo.LoadSongById(id);
-            SongModel song = new SongModel();
-            song.Id = songDTO.Id;
-            song.Title = songDTO.Title;
-            return song;
+            return songRepository.LoadAllSongs();
         }
-        public List<SongModel> LoadAllSongs()
+        public bool AddSong(Song song)
         {
-            List<SongDTO> allSongDTOs = _repo.LoadAllSongs();
-            List<SongModel> allSongs = new List<SongModel>();
-            foreach(SongDTO songDTO in allSongDTOs)
-            {
-                SongModel song = new SongModel();
-                song.Id = songDTO.Id;
-                song.Title = songDTO.Title;
-                allSongs.Add(song);
-            }
-            return allSongs;
+            return songRepository.AddSong(song);
         }
     }
 }
