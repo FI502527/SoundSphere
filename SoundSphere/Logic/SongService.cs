@@ -1,5 +1,6 @@
-﻿using Interfaces;
-using Models;
+﻿using DAL;
+using DAL.DTO;
+using Logic.Models;
 
 namespace Logic
 {
@@ -10,11 +11,20 @@ namespace Logic
         {
             this.songRepository = songRepository;
         }
-        public List<Song> LoadAllSongs()
+        public List<SongModel> LoadAllSongs()
         {
-            return songRepository.LoadAllSongs();
+            List<SongModel> songModels = new List<SongModel>();
+            List<SongDTO> songDTOs = songRepository.LoadAllSongs();
+            foreach(SongDTO songDTO in songDTOs)
+            {
+                SongModel song = new SongModel();
+                song.Id = songDTO.Id;
+                song.Title = songDTO.Title;
+                songModels.Add(song);
+            }
+            return songModels;
         }
-        public bool AddSong(Song song)
+        public bool AddSong(SongDTO song)
         {
             return songRepository.AddSong(song);
         }

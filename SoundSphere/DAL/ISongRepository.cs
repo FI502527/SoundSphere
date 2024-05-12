@@ -11,5 +11,6 @@ namespace DAL
     {
         public SongDTO LoadSongById(int id);
         public List<SongDTO> LoadAllSongs();
+        public bool AddSong(SongDTO song);
     }
 }

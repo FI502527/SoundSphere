@@ -1,11 +1,10 @@
-﻿@using Models
-@model List<Song>
+﻿@model List<SongViewModel>
 <p class="fs-1 text-center fw-bold">Songs</p>
 <p class="text-center"><a type="button" class="btn btn-primary" asp-action="Add" asp-controller="Song">Add song</a></p>
 @if(Model.Any())
 {
     <div class="row row-cols-3 row-gap-3">
-    @foreach(Song song in Model)
+    @foreach(SongViewModel song in Model)
     {
         <div class="col mt-10">
             <div class="card">
