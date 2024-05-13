@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logic.Models
+namespace DAL.DTO
 {
-    public class SongModel
+    public class ArtistDTO
     {
         public int Id { get; set; }
-        public string Title { get; set; }
-        public ArtistModel Artist { get; set; }
+        public string Name { get; set; }
     }
 }

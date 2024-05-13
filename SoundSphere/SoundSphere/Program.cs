@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<SongService>();
 builder.Services.AddTransient<ISongRepository, SongRepository>();
+builder.Services.AddTransient<ArtistService>();
+builder.Services.AddTransient<IArtistRepository, ArtistRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

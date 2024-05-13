@@ -7,9 +7,13 @@ namespace Logic
     public class SongService
     {
         private readonly ISongRepository songRepository;
-        public SongService(ISongRepository songRepository)
+        private readonly IArtistRepository artistRepository;
+        private readonly ArtistService artistService;
+        public SongService(ISongRepository songRepository, IArtistRepository artistRepository)
         {
             this.songRepository = songRepository;
+            this.artistRepository = artistRepository;
+            artistService = new ArtistService(artistRepository);
         }
         public List<SongModel> LoadAllSongs()
         {
@@ -20,6 +24,9 @@ namespace Logic
                 SongModel song = new SongModel();
                 song.Id = songDTO.Id;
                 song.Title = songDTO.Title;
+                SongArtist songArtist = songRepository.GetSongArtist(song.Id);
+                ArtistModel artist = artistService.LoadArtistById(songArtist.Artist_Id);
+                song.Artist = artist;
                 songModels.Add(song);
             }
             return songModels;

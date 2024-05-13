@@ -1,0 +1,23 @@
+﻿@model List<ArtistViewModel>
+@if (Model.Any())
+{
+    <div class="row row-cols-3 row-gap-3">
+    @foreach(ArtistViewModel artist in Model)
+    {
+        <div class="col mt-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title fs-4 fw-bold">@artist.Name</div>
+                    <div class="card-text">
+                        <button type="button" class="btn btn-outline-primary">Learn more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+}
+else
+{
+    <p class="text-center">No artists are found.</p>
+}

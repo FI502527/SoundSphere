@@ -57,10 +57,31 @@ namespace DAL
             Connection conn = new();
             using (SqlConnection sqlConnection = conn.GetConnection())
             {
+
                 SqlCommand command = new SqlCommand($"INSERT INTO Songs (title) VALUES (\'{song.Title}\')", sqlConnection);
                 command.Connection.Open();
                 int result = command.ExecuteNonQuery();
                 return result > 0;
+            }
+        }
+        public SongArtist GetSongArtist(int songId)
+        {
+            Connection conn = new();
+            using (SqlConnection sqlConnection = conn.GetConnection())
+            {
+                SqlCommand command = new SqlCommand($"SELECT * FROM SongArtist WHERE song_id = {songId};", sqlConnection);
+                SongArtist songArtist = new SongArtist();
+                command.Connection.Open();
+                SqlDataReader DataReader = command.ExecuteReader();
+                if (DataReader.HasRows)
+                {
+                    while (DataReader.Read())
+                    {
+                        songArtist.Song_Id = DataReader.GetInt32(0);
+                        songArtist.Artist_Id = DataReader.GetInt32(1);
+                    }
+                }
+                return songArtist;
             }
         }
     }

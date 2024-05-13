@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logic.Models
 {
-    public class SongModel
+    public class ArtistModel
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public ArtistModel Artist { get; set; }
+        public int Id {  get; set; }
+        public string Name { get; set; }
     }
 }
