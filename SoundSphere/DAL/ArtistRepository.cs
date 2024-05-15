@@ -13,44 +13,44 @@ namespace DAL
         public ArtistDTO LoadArtistById(int id)
         {
             Connection conn = new();
-            SqlConnection sqlConnection = conn.GetConnection();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Artists WHERE id = {id};", sqlConnection);
-            ArtistDTO artist = new ArtistDTO();
-            sqlConnection.Open();
-            SqlDataReader DataReader = command.ExecuteReader();
-            if (DataReader.HasRows)
+            using (SqlConnection sqlConnection = conn.GetConnection())
             {
-                while (DataReader.Read())
+                SqlCommand command = new SqlCommand($"SELECT * FROM Artists WHERE id = {id};", sqlConnection);
+                ArtistDTO artist = new ArtistDTO();
+                sqlConnection.Open();
+                SqlDataReader DataReader = command.ExecuteReader();
+                if (DataReader.HasRows)
                 {
-                    artist.Id = DataReader.GetInt32(0);
-                    artist.Name = DataReader.GetString(1);
+                    while (DataReader.Read())
+                    {
+                        artist.Id = DataReader.GetInt32(0);
+                        artist.Name = DataReader.GetString(1);
+                    }
                 }
+                return artist;
             }
-            DataReader.Close();
-            sqlConnection.Close();
-            return artist;
         }
         public List<ArtistDTO> LoadAllArtists()
         {
             Connection conn = new();
-            SqlConnection sqlConnection = conn.GetConnection();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Artists;", sqlConnection);
-            List<ArtistDTO> artists = new List<ArtistDTO>();
-            sqlConnection.Open();
-            SqlDataReader DataReader = command.ExecuteReader();
-            if (DataReader.HasRows)
+            using (SqlConnection sqlConnection = conn.GetConnection())
             {
-                while (DataReader.Read())
+                SqlCommand command = new SqlCommand($"SELECT * FROM Artists;", sqlConnection);
+                List<ArtistDTO> artists = new List<ArtistDTO>();
+                sqlConnection.Open();
+                SqlDataReader DataReader = command.ExecuteReader();
+                if (DataReader.HasRows)
                 {
-                    ArtistDTO artist = new ArtistDTO();
-                    artist.Id = DataReader.GetInt32(0);
-                    artist.Name = DataReader.GetString(1);
-                    artists.Add(artist);
+                    while (DataReader.Read())
+                    {
+                        ArtistDTO artist = new ArtistDTO();
+                        artist.Id = DataReader.GetInt32(0);
+                        artist.Name = DataReader.GetString(1);
+                        artists.Add(artist);
+                    }
                 }
+                return artists;
             }
-            DataReader.Close();
-            sqlConnection.Close();
-            return artists;
         }
     }
 }

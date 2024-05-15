@@ -13,5 +13,6 @@ namespace DAL
         public List<SongDTO> LoadAllSongs();
         public bool AddSong(SongDTO song);
         public SongArtist GetSongArtist(int id);
+        public SongGenre GetSongGenre(int id);
     }
 }

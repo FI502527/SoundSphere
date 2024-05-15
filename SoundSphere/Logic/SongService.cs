@@ -8,11 +8,13 @@ namespace Logic
     {
         private readonly ISongRepository songRepository;
         private readonly IArtistRepository artistRepository;
+        private readonly IGenreRepository genreRepository;
         private readonly ArtistService artistService;
-        public SongService(ISongRepository songRepository, IArtistRepository artistRepository)
+        public SongService(ISongRepository songRepository, IArtistRepository artistRepository, IGenreRepository genreRepository)
         {
             this.songRepository = songRepository;
             this.artistRepository = artistRepository;
+            this.genreRepository = genreRepository;
             artistService = new ArtistService(artistRepository);
         }
         public List<SongModel> LoadAllSongs()
@@ -28,6 +30,8 @@ namespace Logic
                 ArtistModel artist = artistService.LoadArtistById(songArtist.Artist_Id);
                 song.Artist = artist;
                 songModels.Add(song);
+                SongGenre songGenre = genreRepository.LoadGenreById(song.Id);
+                Song
             }
             return songModels;
         }

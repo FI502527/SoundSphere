@@ -13,44 +13,44 @@ namespace DAL
         public SongDTO LoadSongById(int id)
         {
             Connection conn = new();
-            SqlConnection sqlConnection = conn.GetConnection();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Songs WHERE id = {id};", sqlConnection);
-			SongDTO song = new SongDTO();
-            sqlConnection.Open();
-            SqlDataReader DataReader = command.ExecuteReader();
-            if (DataReader.HasRows)
+            using (SqlConnection sqlConnection = conn.GetConnection())
             {
-                while (DataReader.Read())
+                SqlCommand command = new SqlCommand($"SELECT * FROM Songs WHERE id = {id};", sqlConnection);
+                SongDTO song = new SongDTO();
+                sqlConnection.Open();
+                SqlDataReader DataReader = command.ExecuteReader();
+                if (DataReader.HasRows)
                 {
-					song.Id = DataReader.GetInt32(0);
-					song.Title = DataReader.GetString(1);
-				}
+                    while (DataReader.Read())
+                    {
+                        song.Id = DataReader.GetInt32(0);
+                        song.Title = DataReader.GetString(1);
+                    }
+                }
+                return song;
             }
-            DataReader.Close();
-            sqlConnection.Close();
-            return song;
         }
         public List<SongDTO> LoadAllSongs()
         {
             Connection conn = new();
-            SqlConnection sqlConnection = conn.GetConnection();
-            SqlCommand command = new SqlCommand($"SELECT * FROM Songs;", sqlConnection);
-            List<SongDTO> songs = new List<SongDTO>();
-            sqlConnection.Open();
-            SqlDataReader DataReader = command.ExecuteReader();
-            if (DataReader.HasRows)
+            using (SqlConnection sqlConnection = conn.GetConnection())
             {
-                while (DataReader.Read())
+                SqlCommand command = new SqlCommand($"SELECT * FROM Songs;", sqlConnection);
+                List<SongDTO> songs = new List<SongDTO>();
+                sqlConnection.Open();
+                SqlDataReader DataReader = command.ExecuteReader();
+                if (DataReader.HasRows)
                 {
-					SongDTO song = new SongDTO();
-                    song.Id = DataReader.GetInt32(0);
-                    song.Title = DataReader.GetString(1);
-                    songs.Add(song);
+                    while (DataReader.Read())
+                    {
+                        SongDTO song = new SongDTO();
+                        song.Id = DataReader.GetInt32(0);
+                        song.Title = DataReader.GetString(1);
+                        songs.Add(song);
+                    }
                 }
+                return songs;
             }
-            DataReader.Close();
-            sqlConnection.Close();
-            return songs;
         }
         public bool AddSong(SongDTO song)
         {
@@ -82,6 +82,26 @@ namespace DAL
                     }
                 }
                 return songArtist;
+            }
+        }
+        public SongGenre GetSongGenre(int songId)
+        {
+            Connection conn = new();
+            using(SqlConnection sqlConnection = conn.GetConnection())
+            {
+                SqlCommand command = new SqlCommand($"SELECT song_id, genre_id FROM SongGenre WHERE song_id = {songId}");
+                SongGenre songGenre = new SongGenre();
+                command.Connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+                if (dataReader.HasRows )
+                {
+                    while (dataReader.Read())
+                    {
+                        songGenre.Song_Id = dataReader.GetInt32(0);
+                        songGenre.Genre_Id = dataReader.GetInt32(1);
+                    }
+                }
+                return songGenre;
             }
         }
     }
