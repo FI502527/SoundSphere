@@ -71,7 +71,7 @@ namespace DAL
             {
                 SqlCommand command = new SqlCommand($"SELECT * FROM SongArtist WHERE song_id = {songId};", sqlConnection);
                 SongArtist songArtist = new SongArtist();
-                command.Connection.Open();
+                sqlConnection.Open();
                 SqlDataReader DataReader = command.ExecuteReader();
                 if (DataReader.HasRows)
                 {
@@ -89,9 +89,9 @@ namespace DAL
             Connection conn = new();
             using(SqlConnection sqlConnection = conn.GetConnection())
             {
-                SqlCommand command = new SqlCommand($"SELECT song_id, genre_id FROM SongGenre WHERE song_id = {songId}");
+                SqlCommand command = new SqlCommand($"SELECT song_id, genre_id FROM SongGenre WHERE song_id = {songId}", sqlConnection);
                 SongGenre songGenre = new SongGenre();
-                command.Connection.Open();
+                sqlConnection.Open();
                 SqlDataReader dataReader = command.ExecuteReader();
                 if (dataReader.HasRows )
                 {

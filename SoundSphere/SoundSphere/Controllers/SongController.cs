@@ -9,9 +9,9 @@ namespace SoundSphere.Controllers
     public class SongController : Controller
     {
         SongService _songService;
-        public SongController(ISongRepository _songRepository, IArtistRepository _artistRepository)
+        public SongController(ISongRepository _songRepository, IArtistRepository _artistRepository, IGenreRepository _genreRepository)
         {
-            _songService = new SongService(_songRepository, _artistRepository);
+            _songService = new SongService(_songRepository, _artistRepository, _genreRepository);
         }
         public IActionResult Index()
         {
@@ -26,6 +26,10 @@ namespace SoundSphere.Controllers
                 artist.Id = songModel.Artist.Id;
                 artist.Name = songModel.Artist.Name;
                 song.Artist = artist;
+                GenreViewModel genre = new GenreViewModel();
+                genre.Id = songModel.Genre.Id;
+                genre.Name = songModel.Genre.Name;
+                song.Genre = genre;
                 songViewModels.Add(song);
             }
             return View(songViewModels);

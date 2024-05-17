@@ -15,7 +15,7 @@ namespace DAL
             Connection conn = new();
             using (SqlConnection sqlConnection = conn.GetConnection())
             {
-                SqlCommand command = new SqlCommand($"SELECT * FROM Genres WHERE song_id = {songId};", sqlConnection);
+                SqlCommand command = new SqlCommand($"SELECT * FROM Genres WHERE id = {songId};", sqlConnection);
                 GenreDTO genre = new GenreDTO();
                 sqlConnection.Open();
                 SqlDataReader DataReader = command.ExecuteReader();

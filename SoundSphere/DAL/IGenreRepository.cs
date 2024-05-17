@@ -9,6 +9,6 @@ namespace DAL
 {
     public interface IGenreRepository
     {
-        public SongGenre LoadGenreById(int songId);
+        public GenreDTO LoadGenreById(int songId);
     }
 }

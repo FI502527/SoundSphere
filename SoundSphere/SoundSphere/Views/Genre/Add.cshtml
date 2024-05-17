@@ -1,0 +1,9 @@
+﻿@model GenreViewModel
+<p class="fs-1 text-center fw-bold">Add genre</p>
+<form method="POST" asp-action="AddGenre" asp-controller="Genre" class="text-center">
+    <p>
+        <label for="title">Genre</label><br />
+        <input type="text" id="genre" name="genre" placeholder="Genre" required asp-for="Name"/>
+    </p>
+    <input type="submit" value="Submit" />
+</form>

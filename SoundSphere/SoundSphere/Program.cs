@@ -7,6 +7,8 @@ builder.Services.AddTransient<SongService>();
 builder.Services.AddTransient<ISongRepository, SongRepository>();
 builder.Services.AddTransient<ArtistService>();
 builder.Services.AddTransient<IArtistRepository, ArtistRepository>();
+builder.Services.AddTransient<GenreService>();
+builder.Services.AddTransient<IGenreRepository, GenreRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
