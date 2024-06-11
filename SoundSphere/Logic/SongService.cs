@@ -40,6 +40,21 @@ namespace Logic
 			}
             return songModels;
         }
+        public SongModel LoadSongById(int id)
+        {
+            SongDTO songDTO = songRepository.LoadSongById(id);
+            SongModel song = new SongModel();
+            song.Id = songDTO.Id;
+            song.Title = songDTO.Title;
+            SongArtist songArtist = songRepository.GetSongArtist(song.Id);
+            ArtistModel artist = artistService.LoadArtistById(songArtist.Artist_Id);
+            song.Artist = artist;
+            SongGenre songGenre = songRepository.GetSongGenre(song.Id);
+            GenreModel genre = genreService.LoadGenreById(songGenre.Genre_Id);
+            song.Genre = genre;
+            return song;
+
+        }
         public bool AddSong(SongDTO song)
         {
             return songRepository.AddSong(song);
